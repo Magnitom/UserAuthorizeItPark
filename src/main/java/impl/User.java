@@ -16,6 +16,7 @@ public class User {
     private int age;
     private String permission;
     private boolean adminPerm = false;
+    private boolean firstLogin = true;
 
     public User(String login, String pass, String permission) {
         numOfUsers++;
@@ -57,6 +58,20 @@ public class User {
                 ", Имя='" + name + '\'' +
                 ", Фамилия='" + secondName + '\'' +
                 ", Права доступа='" + permission + "'";
+    }
+
+    public boolean isAdminPerm() {
+        return adminPerm;
+    }
+
+
+
+    public boolean isFirstLogin() {
+        return firstLogin;
+    }
+
+    public void setFirstLogin(boolean firstLogin) {
+        this.firstLogin = firstLogin;
     }
 
     public void setAdminPerm(boolean adminPerm) {

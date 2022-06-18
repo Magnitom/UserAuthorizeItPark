@@ -27,7 +27,7 @@ public class app {
                     login.registrationUser();
                     break;
                 case "3":
-                    System.out.println("Досвидания.");
+                    System.out.println("До свидания.");
                     quit = true;
                     break;
                 default:

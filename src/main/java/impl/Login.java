@@ -11,19 +11,19 @@ public class Login {
         User userInSystem = userLogin(userList);
         if (userInSystem.getPermission().equals("SUPER")) {
             UserSuper superUser = new UserSuper();
-            superUser.UserInWork();
+            superUser.UserInWork(userInSystem);
         }
         if (userInSystem.getPermission().equals("ADMIN")) {
             UserAdmin adminUser = new UserAdmin();
-            adminUser.UserInWork();
+            adminUser.UserInWork(userInSystem);
         }
         if (userInSystem.getPermission().equals("AIB")) {
             UserAIB aibUser = new UserAIB();
-            aibUser.UserInWork();
+            aibUser.UserInWork(userInSystem);
         }
         if (userInSystem.getPermission().equals("USER")) {
             UserUser UserUser = new UserUser();
-            UserUser.UserInWork();
+            UserUser.UserInWork(userInSystem);
         }
     }
 

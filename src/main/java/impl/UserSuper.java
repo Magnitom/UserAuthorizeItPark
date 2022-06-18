@@ -9,10 +9,10 @@ import static app.app.userList;
 
 public class UserSuper extends UserPerm {
 
-    public void UserInWork() {
+    public void UserInWork(User user) {
         boolean quit = false;
         do {
-            System.out.println("Вы вошли с правами SUPER\nВыберите доступные функции:");
+            System.out.println("Вы вошли с правами SUPER\nВыберите доступные Вам функции:");
             System.out.println("1 - Создать пользователя c правами ADMIN или AIB.\n" +
                     "2 - Поменять роль у пользователя c правами ADMIN или AIB.\n" +
                     "3 - Поменять логин у пользователя c правами ADMIN или AIB.\n" +
@@ -47,7 +47,6 @@ public class UserSuper extends UserPerm {
                     System.out.println("Введено не верное значение, попробуйте снова");
                     break;
             }
-            if (quit) break;
         } while (!quit);
 
     }
