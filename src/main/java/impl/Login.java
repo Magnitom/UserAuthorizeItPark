@@ -45,7 +45,7 @@ public class Login {
             if (!userFind) {
                 System.out.println("Пользователь с таким логином не существует, повтороите ввод снова. У вас осталость " + j + " попытки на ввод");
             } else break;
-            if (j == 0 && !userFind){
+            if (j == 0){
                 return null;
             }
         }
