@@ -9,6 +9,7 @@ public class Login {
 
     public void userSelection(){
         User userInSystem = userLogin(userList);
+        if (userInSystem == null) return;
         if (userInSystem.getPermission().equals("SUPER")) {
             UserSuper superUser = new UserSuper();
             superUser.UserInWork(userInSystem);
@@ -22,15 +23,15 @@ public class Login {
             aibUser.UserInWork(userInSystem);
         }
         if (userInSystem.getPermission().equals("USER")) {
-            UserUser UserUser = new UserUser();
-            UserUser.UserInWork(userInSystem);
+            UserUser userUser = new UserUser();
+            userUser.UserInWork(userInSystem);
         }
     }
 
     public User userLogin(List<User> userList) {
         Scanner sc = new Scanner(System.in);
         int numberUserList = 0;
-        do {
+        for (int j = 2; j >= 0; j--) {
             System.out.println("Введите логин:");
             String userInputLogin = sc.nextLine();
             boolean userFind = false;
@@ -42,19 +43,25 @@ public class Login {
                 }
             }
             if (!userFind) {
-                System.out.println("Пользователь с таким логином не существует, повтороите ввод снова.");
+                System.out.println("Пользователь с таким логином не существует, повтороите ввод снова. У вас осталость " + j + " попытки на ввод");
             } else break;
-        } while (true);
-        do {
+            if (j == 0 && !userFind){
+                return null;
+            }
+        }
+        for (int i = 2; i >= 0; i--) {
             System.out.println("Введите пароль:");
             String userInputPass = sc.nextLine();
             if (userList.get(numberUserList).getPass().equals(userInputPass)) {
                 System.out.println("Добро пожаловать!");
                 break;
             } else {
-                System.out.println("Введён не верный пароль!");
+                System.out.println("Введён не верный пароль! У вас осталость " + i + " попытки на ввод");
             }
-        }while (true);
+            if (i == 0){
+                return null;
+            }
+        }
         return userList.get(numberUserList);
     }
 
