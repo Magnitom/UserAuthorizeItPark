@@ -17,6 +17,8 @@ public class User {
     private String permission;
 
     public User(String login, String pass, String permission) {
+        numOfUsers++;
+        this.ID = numOfUsers;
         this.login = login;
         this.pass = pass;
         this.permission = permission;

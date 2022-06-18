@@ -1,6 +1,5 @@
 package app;
 
-import api.UserPerm;
 import impl.*;
 
 import java.util.ArrayList;
@@ -35,9 +34,5 @@ public class app {
                     System.out.println("Введено не верное значение, попробуйте снова");
             }
         }while (!quit);
-
-
     }
-
-
 }

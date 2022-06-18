@@ -2,8 +2,8 @@ package impl;
 
 import api.UserPerm;
 
-import java.util.Scanner;
-import java.util.stream.Stream;
+import java.util.ArrayList;
+import java.util.List;
 
 import static app.app.userList;
 
@@ -60,22 +60,32 @@ public class UserSuper extends UserPerm {
         System.out.println();
     }
 
-    private void viewAdminAibUsers() {
+    private List<Integer> viewAdminAibUsers() {
         System.out.println("\nСписок пользователей, зарегистрированных в системе c правами ADMIN и AIB:");
-        for (User i :
-                userList) {
+        List<Integer> listAdminAib = new ArrayList<>();
+        for (User i : userList) {
             if (i.getPermission().equals("ADMIN") || i.getPermission().equals("AIB")) {
                 System.out.println(i);
+                listAdminAib.add(i.getID());
             }
         }
         System.out.println();
+        return listAdminAib;
     }
 
     private User pickUser() {
-        viewAdminAibUsers();
-        int pickUserChange = sc.nextInt();
-        sc.nextLine();
-        return userList.get(pickUserChange);
+        List<Integer> listAdminAib = viewAdminAibUsers();
+        int pickUserChange = 0;
+        do {
+            pickUserChange = sc.nextInt();
+            sc.nextLine();
+            if (listAdminAib.contains(pickUserChange)) {
+                break;
+            } else {
+                System.out.println("Введено не верное значение, попробуйте снова");
+            }
+        } while (true);
+        return userList.get(pickUserChange-1);
     }
 
     private void createUser() {
@@ -95,7 +105,6 @@ public class UserSuper extends UserPerm {
                 "2 - AIB\n" +
                 "3 - USER");
         boolean quit = false;
-        sc.nextLine();
         do {
             switch (sc.nextLine()) {
                 case "1":
@@ -124,7 +133,6 @@ public class UserSuper extends UserPerm {
         User user = pickUser();
         System.out.println("Текущий логин у пользователя с ID '" + user.getID() + "' - '" + user.getLogin() + '\'');
         System.out.println("Напишите логин, на который нужно изменить:");
-        sc.nextLine();
         user.setLogin(sc.nextLine());
         System.out.println("Логин успешно изменён\n");
     }
