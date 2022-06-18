@@ -23,48 +23,39 @@ public class UserSuper extends UserPerm {
             String action = sc.nextLine();
             switch (action) {
                 case "1":
+                    System.out.println();
                     createUser();
                     break;
                 case "2":
+                    System.out.println();
                     changePermUser();
                     break;
                 case "3":
+                    System.out.println();
                     changeLoginUser();
                     break;
                 case "4":
+                    System.out.println();
                     resetPassToDefault();
                     break;
                 case "5":
+                    System.out.println();
                     deleteUserAibAdmin();
                     break;
                 case "6":
+                    System.out.println();
                     viewAllUsers();
                     break;
                 case "9":
+                    System.out.println();
                     quit = true;
                     break;
                 default:
-                    System.out.println("Введено не верное значение, попробуйте снова");
+                    System.out.println(incorrectInput);
                     break;
             }
         } while (!quit);
 
-    }
-
-    private String checkLogin() {
-        String login;
-        boolean quit;
-        do {
-            quit = true;
-            login = sc.nextLine();
-            for (User i : userList) {
-                if (i.getLogin().equals(login)) {
-                    System.out.println("Данный логин уже есть в системе, выберите другой.");
-                    quit = false;
-                }
-            }
-        }while (!quit);
-        return login;
     }
 
     private void viewAllUsers() {
@@ -73,34 +64,6 @@ public class UserSuper extends UserPerm {
             System.out.println(i);
         }
         System.out.println();
-    }
-
-    private List<Integer> viewAdminAibUsers() {
-        System.out.println("\nСписок пользователей, зарегистрированных в системе c правами ADMIN и AIB:");
-        List<Integer> listAdminAib = new ArrayList<>();
-        for (User i : userList) {
-            if (i.getPermission().equals("ADMIN") || i.getPermission().equals("AIB")) {
-                System.out.println(i);
-                listAdminAib.add(i.getID());
-            }
-        }
-        System.out.println();
-        return listAdminAib;
-    }
-
-    private User pickUser() {
-        List<Integer> listAdminAib = viewAdminAibUsers();
-        int pickUserChange = 0;
-        do {
-            pickUserChange = sc.nextInt();
-            sc.nextLine();
-            if (listAdminAib.contains(pickUserChange)) {
-                break;
-            } else {
-                System.out.println("Введено не верное значение, попробуйте снова");
-            }
-        } while (true);
-        return userList.get(pickUserChange - 1);
     }
 
     private void createUser() {
@@ -114,7 +77,9 @@ public class UserSuper extends UserPerm {
 
     private void changePermUser() {
         System.out.println("Выберите пользователя по ID, у которого вы хотите поменять права.");
-        User user = pickUser();
+        List<Integer> listAdminAib = viewUsers("ADMIN", "AIB");
+        if (listAdminAib.isEmpty()) return;
+        User user = pickUser(listAdminAib);
         System.out.println("Выберите требуемы права доступа для пользователя:\n" +
                 "1 - ADMIN\n" +
                 "2 - AIB\n" +
@@ -135,7 +100,7 @@ public class UserSuper extends UserPerm {
                     quit = true;
                     break;
                 default:
-                    System.out.println("Введено не верное значение, попробуйте снова");
+                    System.out.println(incorrectInput);
                     break;
             }
         } while (!quit);
@@ -145,7 +110,9 @@ public class UserSuper extends UserPerm {
 
     private void changeLoginUser() {
         System.out.println("Выберите пользователя по ID, у которого вы хотите поменять логин.");
-        User user = pickUser();
+        List<Integer> listAdminAib = viewUsers("ADMIN", "AIB");
+        if (listAdminAib.isEmpty()) return;
+        User user = pickUser(listAdminAib);
         System.out.println("Текущий логин у пользователя с ID '" + user.getID() + "' - '" + user.getLogin() + '\'');
         System.out.println("Напишите логин, на который нужно изменить:");
         user.setLogin(checkLogin());
@@ -154,14 +121,18 @@ public class UserSuper extends UserPerm {
 
     private void resetPassToDefault() {
         System.out.println("Выберите пользователя по ID, у которого вы хотите сбросить пароль.");
-        User user = pickUser();
+        List<Integer> listAdminAib = viewUsers("ADMIN", "AIB");
+        if (listAdminAib.isEmpty()) return;
+        User user = pickUser(listAdminAib);
         user.setPass(user.getDefaultPass());
         System.out.println("Пароль успешно сброшен у пользователя с ID '" + user.getID() + "\'\n");
     }
 
     private void deleteUserAibAdmin() {
         System.out.println("Выберите пользователя по ID, которого вы хотите удалить");
-        User user = pickUser();
+        List<Integer> listAdminAib = viewUsers("ADMIN", "AIB");
+        if (listAdminAib.isEmpty()) return;
+        User user = pickUser(listAdminAib);
         userList.remove(user);
         System.out.println("Пользователь с ID '" + user.getID() + "\' удалён.\n");
     }

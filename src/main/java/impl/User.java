@@ -15,7 +15,7 @@ public class User {
     private int ID;
     private int age;
     private String permission;
-    private boolean adminPerm = false;
+    private boolean adminPerm = true;
     private boolean firstLogin = true;
 
     public User(String login, String pass, String permission) {
