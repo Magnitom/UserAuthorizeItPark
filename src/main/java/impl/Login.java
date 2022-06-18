@@ -61,10 +61,27 @@ public class Login {
     public void registrationUser(){
         System.out.println("Придумайте логин");
         Scanner sc = new Scanner(System.in);
-        String newLoginUser = sc.nextLine();
+        String newLoginUser = checkLogin();
         System.out.println("Придумайте пароль");
         String newPassUser = sc.nextLine();
         userList.add(new User(newLoginUser, newPassUser, "USER"));
         System.out.println("Вы успешно зарегистрировались в системе.\n");
+    }
+
+    private String checkLogin() {
+        Scanner sc = new Scanner(System.in);
+        String login;
+        boolean quit;
+        do {
+            quit = true;
+            login = sc.nextLine();
+            for (User i : userList) {
+                if (i.getLogin().equals(login)) {
+                    System.out.println("Данный логин уже есть в системе, выберите другой.");
+                    quit = false;
+                }
+            }
+        }while (!quit);
+        return login;
     }
 }

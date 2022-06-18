@@ -15,6 +15,7 @@ public class User {
     private int ID;
     private int age;
     private String permission;
+    private boolean adminPerm = false;
 
     public User(String login, String pass, String permission) {
         numOfUsers++;
@@ -56,6 +57,10 @@ public class User {
                 ", Имя='" + name + '\'' +
                 ", Фамилия='" + secondName + '\'' +
                 ", Права доступа='" + permission + "'";
+    }
+
+    public void setAdminPerm(boolean adminPerm) {
+        this.adminPerm = adminPerm;
     }
 
     public String getPermission() {

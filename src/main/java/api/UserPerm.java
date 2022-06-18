@@ -6,4 +6,5 @@ public abstract class UserPerm {
 
     protected Scanner sc = new Scanner(System.in);
 
+    abstract protected void UserInWork();
 }

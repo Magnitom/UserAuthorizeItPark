@@ -5,7 +5,7 @@ import api.UserPerm;
 public class UserAIB extends UserPerm {
 
 
-    static public void UserInWork() {
+    public void UserInWork() {
 
     }
 }

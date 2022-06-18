@@ -52,6 +52,22 @@ public class UserSuper extends UserPerm {
 
     }
 
+    private String checkLogin() {
+        String login;
+        boolean quit;
+        do {
+            quit = true;
+            login = sc.nextLine();
+            for (User i : userList) {
+                if (i.getLogin().equals(login)) {
+                    System.out.println("Данный логин уже есть в системе, выберите другой.");
+                    quit = false;
+                }
+            }
+        }while (!quit);
+        return login;
+    }
+
     private void viewAllUsers() {
         System.out.println("\nСписок пользователей, зарегистрированных в системе:");
         for (User i : userList) {
@@ -85,12 +101,12 @@ public class UserSuper extends UserPerm {
                 System.out.println("Введено не верное значение, попробуйте снова");
             }
         } while (true);
-        return userList.get(pickUserChange-1);
+        return userList.get(pickUserChange - 1);
     }
 
     private void createUser() {
         System.out.println("Придумайте логин пользователю");
-        String login = sc.nextLine();
+        String login = checkLogin();
         System.out.println("Придумайте пароль пользовтелю");
         String pass = sc.nextLine();
         userList.add(new User(login, pass));
@@ -133,7 +149,7 @@ public class UserSuper extends UserPerm {
         User user = pickUser();
         System.out.println("Текущий логин у пользователя с ID '" + user.getID() + "' - '" + user.getLogin() + '\'');
         System.out.println("Напишите логин, на который нужно изменить:");
-        user.setLogin(sc.nextLine());
+        user.setLogin(checkLogin());
         System.out.println("Логин успешно изменён\n");
     }
 
