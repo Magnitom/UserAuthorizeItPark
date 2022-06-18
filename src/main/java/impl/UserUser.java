@@ -1,13 +1,8 @@
 package impl;
 
-import api.UserApi;
+import api.UserPerm;
 
-public class UserUser extends UserApi {
-
-
-    public UserUser(String login, String pass, String permission) {
-        super(login, pass, permission);
-    }
+public class UserUser extends UserPerm {
 
     public void UserInWork() {
 

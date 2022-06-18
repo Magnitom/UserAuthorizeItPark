@@ -1,13 +1,11 @@
 package impl;
 
-import api.UserApi;
-
 import java.util.List;
 import java.util.Scanner;
 
 public class Login {
 
-    public UserApi userLogin(List<UserApi> userList) {
+    public User userLogin(List<User> userList) {
         Scanner sc = new Scanner(System.in);
         int numberUserList = 0;
         do {
