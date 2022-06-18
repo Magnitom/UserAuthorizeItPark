@@ -3,7 +3,29 @@ package impl;
 import java.util.List;
 import java.util.Scanner;
 
+import static app.app.userList;
+
 public class Login {
+
+    public void userSelection(){
+        User userInSystem = userLogin(userList);
+        if (userInSystem.getPermission().equals("SUPER")) {
+            UserSuper superUser = new UserSuper();
+            superUser.UserInWork();
+        }
+        if (userInSystem.getPermission().equals("ADMIN")) {
+            UserAdmin adminUser = new UserAdmin();
+            adminUser.UserInWork();
+        }
+        if (userInSystem.getPermission().equals("AIB")) {
+            UserAIB aibUser = new UserAIB();
+            aibUser.UserInWork();
+        }
+        if (userInSystem.getPermission().equals("USER")) {
+            UserUser UserUser = new UserUser();
+            UserUser.UserInWork();
+        }
+    }
 
     public User userLogin(List<User> userList) {
         Scanner sc = new Scanner(System.in);
@@ -13,7 +35,6 @@ public class Login {
             String userInputLogin = sc.nextLine();
             boolean userFind = false;
             for (int i = 0; i < userList.size(); i++) {
-
                 if (userList.get(i).getLogin().equals(userInputLogin)) {
                     numberUserList = i;
                     userFind = true;
@@ -35,5 +56,15 @@ public class Login {
             }
         }while (true);
         return userList.get(numberUserList);
+    }
+
+    public void registrationUser(){
+        System.out.println("Придумайте логин");
+        Scanner sc = new Scanner(System.in);
+        String newLoginUser = sc.nextLine();
+        System.out.println("Придумайте пароль");
+        String newPassUser = sc.nextLine();
+        userList.add(new User(newLoginUser, newPassUser, "USER"));
+        System.out.println("Вы успешно зарегистрировались в системе.\n");
     }
 }

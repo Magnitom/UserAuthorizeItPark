@@ -3,6 +3,7 @@ package impl;
 import api.UserPerm;
 
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 import static app.app.userList;
 
@@ -33,11 +34,17 @@ public class UserSuper extends UserPerm {
                 case "4":
                     resetPassToDefault();
                     break;
+                case "5":
+                    deleteUserAibAdmin();
+                    break;
                 case "6":
                     viewAllUsers();
                     break;
                 case "9":
                     quit = true;
+                    break;
+                default:
+                    System.out.println("Введено не верное значение, попробуйте снова");
                     break;
             }
             if (quit) break;
@@ -45,9 +52,29 @@ public class UserSuper extends UserPerm {
 
     }
 
+    private void viewAllUsers() {
+        System.out.println("\nСписок пользователей, зарегистрированных в системе:");
+        for (User i : userList) {
+            System.out.println(i);
+        }
+        System.out.println();
+    }
+
+    private void viewAdminAibUsers() {
+        System.out.println("\nСписок пользователей, зарегистрированных в системе c правами ADMIN и AIB:");
+        for (User i :
+                userList) {
+            if (i.getPermission().equals("ADMIN") || i.getPermission().equals("AIB")) {
+                System.out.println(i);
+            }
+        }
+        System.out.println();
+    }
+
     private User pickUser() {
-        viewAllUsers();
+        viewAdminAibUsers();
         int pickUserChange = sc.nextInt();
+        sc.nextLine();
         return userList.get(pickUserChange);
     }
 
@@ -102,20 +129,19 @@ public class UserSuper extends UserPerm {
         System.out.println("Логин успешно изменён\n");
     }
 
-    private void resetPassToDefault(){
+    private void resetPassToDefault() {
         System.out.println("Выберите пользователя по ID, у которого вы хотите сбросить пароль.");
         User user = pickUser();
         user.setPass(user.getDefaultPass());
-        System.out.println("Пароль успешно сброшен у пользователя с ID '" + user.getID() + '\'');
+        System.out.println("Пароль успешно сброшен у пользователя с ID '" + user.getID() + "\'\n");
     }
 
-    private void viewAllUsers() {
-        System.out.println("\nСписок пользователей, зарегистрированных в системе:");
-        for (User i :
-                userList) {
-            System.out.println(i);
-        }
-        System.out.println();
+    private void deleteUserAibAdmin() {
+        System.out.println("Выберите пользователя по ID, которого вы хотите удалить");
+        User user = pickUser();
+        userList.remove(user);
+        System.out.println("Пользователь с ID '" + user.getID() + "\' удалён.\n");
     }
+
 
 }

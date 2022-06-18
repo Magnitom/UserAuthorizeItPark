@@ -15,25 +15,28 @@ public class app {
         User superUserSuper = new User("SUPER", "SUPER", "SUPER");
         userList.add(superUserSuper);
         Login login = new Login();
+        Scanner sc = new Scanner(System.in);
+        boolean quit = false;
         do {
-            User userInSystem = login.userLogin(userList);
-            if (userInSystem.getPermission().equals("SUPER")) {
-                UserSuper superUser = new UserSuper();
-                superUser.UserInWork();
+            System.out.println("Добро пожаловать в систему. Выберите требуемое действие\n" +
+                    "1 - Войти в систему.\n2 - Зарегистрироваться в системе.\n3 - Выйти из программы.");
+            switch (sc.nextLine()) {
+                case "1":
+                    login.userSelection();
+                    break;
+                case "2":
+                    login.registrationUser();
+                    break;
+                case "3":
+                    System.out.println("Досвидания.");
+                    quit = true;
+                    break;
+                default:
+                    System.out.println("Введено не верное значение, попробуйте снова");
             }
-            if (userInSystem.getPermission().equals("ADMIN")) {
-                UserAdmin adminUser = new UserAdmin();
-                adminUser.UserInWork();
-            }
-            if (userInSystem.getPermission().equals("AIB")) {
-                UserAIB aibUser = new UserAIB();
-                aibUser.UserInWork();
-            }
-            if (userInSystem.getPermission().equals("USER")) {
-                UserUser UserUser = new UserUser();
-                UserUser.UserInWork();
-            }
-        }while (true);
+        }while (!quit);
+
+
     }
 
 
