@@ -45,7 +45,7 @@ public class UserAdmin extends UserPerm {
     }
 
     private void changeUser() {
-        System.out.println("Выберите пользователя по ID, у которого вы хотите поменять данные.");
+        System.out.println("Выберите пользователя, у которого вы хотите поменять данные.");
         List<Integer> listIdUsers = viewUsers("USER");
         User user = pickUser(listIdUsers);
         boolean quit = false;

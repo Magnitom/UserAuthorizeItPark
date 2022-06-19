@@ -32,22 +32,23 @@ public abstract class UserPerm {
                 System.out.println(incorrectInput);
             }
         } while (true);
-        return userList.get(pickUserChange-1);
+
+        return userList.get(pickUserChange);
     }
 
     protected List<Integer> viewUsers(String... permissions) {
         List<Integer> listId = new ArrayList<>();
         System.out.println("Список пользователей, зарегистрированных в системе c правами " + Arrays.toString(permissions) + " :");
-        for (User i : userList) {
+        for (int i = 0; i < userList.size(); i++)  {
             if (permissions.length == 2) {
-                if (i.getPermission().equals(permissions[0]) || i.getPermission().equals(permissions[1])) {
-                    System.out.println(i);
-                    listId.add(i.getID());
+                if (userList.get(i).getPermission().equals(permissions[0]) || userList.get(i).getPermission().equals(permissions[1])) {
+                    System.out.println(i + " - " + userList.get(i));
+                    listId.add(i);
                 }
             } else {
-                if (i.getPermission().equals(permissions[0])) {
-                    System.out.println(i);
-                    listId.add(i.getID());
+                if (userList.get(i).getPermission().equals(permissions[0])) {
+                    System.out.println(i + " - " + userList.get(i));
+                    listId.add(i);
                 }
             }
         }

@@ -51,7 +51,7 @@ public class UserAIB extends UserPerm {
     }
 
     private void givePermissionAdmins() {
-        System.out.println("Выберите пользователя по ID, которму хотите дать разрешение на изменение данных пользователя USER.");
+        System.out.println("Выберите пользователя, которму хотите дать разрешение на изменение данных пользователя USER.");
         List<Integer> listIdUsers = viewUsers("ADMIN");
         if (listIdUsers.isEmpty()) return;
         User user = pickUser(listIdUsers);
@@ -60,7 +60,7 @@ public class UserAIB extends UserPerm {
     }
 
     private void changeUser() {
-        System.out.println("Выберите пользователя по ID, у которого вы хотите поменять данные.");
+        System.out.println("Выберите пользователя, у которого вы хотите поменять данные.");
         List<Integer> listIdUsers = viewUsers("USER");
         if (listIdUsers.isEmpty()) return;
         User user = pickUser(listIdUsers);
@@ -87,7 +87,7 @@ public class UserAIB extends UserPerm {
     }
 
     private void delUser() {
-        System.out.println("Выберите пользователя по ID, которого вы хотите удалить.");
+        System.out.println("Выберите пользователя, которого вы хотите удалить.");
         List<Integer> listIdUsers = viewUsers("USER");
         if (listIdUsers.isEmpty()) return;
         User user = pickUser(listIdUsers);

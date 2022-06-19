@@ -60,8 +60,8 @@ public class UserSuper extends UserPerm {
 
     private void viewAllUsers() {
         System.out.println("\nСписок пользователей, зарегистрированных в системе:");
-        for (User i : userList) {
-            System.out.println(i);
+        for (int i = 0; i < userList.size(); i++) {
+            System.out.println(i + " - " + userList.get(i));
         }
         System.out.println();
     }
@@ -76,7 +76,7 @@ public class UserSuper extends UserPerm {
     }
 
     private void changePermUser() {
-        System.out.println("Выберите пользователя по ID, у которого вы хотите поменять права.");
+        System.out.println("Выберите пользователя, у которого вы хотите поменять права.");
         List<Integer> listAdminAib = viewUsers("ADMIN", "AIB");
         if (listAdminAib.isEmpty()) return;
         User user = pickUser(listAdminAib);
@@ -109,7 +109,7 @@ public class UserSuper extends UserPerm {
     }
 
     private void changeLoginUser() {
-        System.out.println("Выберите пользователя по ID, у которого вы хотите поменять логин.");
+        System.out.println("Выберите пользователя, у которого вы хотите поменять логин.");
         List<Integer> listAdminAib = viewUsers("ADMIN", "AIB");
         if (listAdminAib.isEmpty()) return;
         User user = pickUser(listAdminAib);
@@ -120,7 +120,7 @@ public class UserSuper extends UserPerm {
     }
 
     private void resetPassToDefault() {
-        System.out.println("Выберите пользователя по ID, у которого вы хотите сбросить пароль.");
+        System.out.println("Выберите пользователя, у которого вы хотите сбросить пароль.");
         List<Integer> listAdminAib = viewUsers("ADMIN", "AIB");
         if (listAdminAib.isEmpty()) return;
         User user = pickUser(listAdminAib);
@@ -129,7 +129,7 @@ public class UserSuper extends UserPerm {
     }
 
     private void deleteUserAibAdmin() {
-        System.out.println("Выберите пользователя по ID, которого вы хотите удалить");
+        System.out.println("Выберите пользователя, которого вы хотите удалить");
         List<Integer> listAdminAib = viewUsers("ADMIN", "AIB");
         if (listAdminAib.isEmpty()) return;
         User user = pickUser(listAdminAib);

@@ -71,7 +71,23 @@ public class Login {
         String newLoginUser = checkLogin();
         System.out.println("Придумайте пароль");
         String newPassUser = sc.nextLine();
-        userList.add(new User(newLoginUser, newPassUser, "USER"));
+        System.out.println("Ваше Имя");
+        String newName = sc.nextLine();
+        System.out.println("Ваша Фамилия");
+        String newSecondName = sc.nextLine();
+        System.out.println("Ваше Отчество");
+        String newThirdName = sc.nextLine();
+        Integer newAge;
+        do {
+            try {
+                System.out.println("Введите ваш возраст");
+                newAge = Integer.parseInt(sc.nextLine());
+                break;
+            }catch (Exception ex){
+                System.out.println("Введено не верное значение, попробуйте снова");
+            }
+        }while (true);
+        userList.add(new User(newLoginUser, newPassUser, newSecondName, newName, newThirdName, newAge, "USER"));
         System.out.println("Вы успешно зарегистрировались в системе.\n");
     }
 
