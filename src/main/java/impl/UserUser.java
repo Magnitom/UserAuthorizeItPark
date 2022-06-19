@@ -7,7 +7,7 @@ public class UserUser extends UserPerm {
     public void UserInWork(User user) {
         boolean quit = false;
         do {
-            System.out.println("Добро пожаловать " + user.getName() + "вы вошли с правами USER");
+            System.out.println("'" + user.getName() + "' вы вошли с правами USER");
             System.out.println("Выберите доступные вам функции:\n1 Выйти");
             String action = sc.nextLine();
             switch (action) {
